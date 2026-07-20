@@ -1,0 +1,38 @@
+{
+  "entities": {
+    "file": {
+      "title": "File Metadata",
+      "description": "Metadata of uploaded files stored securely in ClientVault",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique file ID" },
+        "name": { "type": "string", "description": "Name of the file" },
+        "size": { "type": "number", "description": "Size of the file in bytes" },
+        "type": { "type": "string", "description": "MIME type of the file" },
+        "ownerId": { "type": "string", "description": "UID of the owner" },
+        "uploadedAt": { "type": "string", "format": "date-time", "description": "Upload timestamp" }
+      },
+      "required": ["id", "name", "size", "type", "ownerId", "uploadedAt"]
+    },
+    "userProfile": {
+      "title": "User Profile",
+      "description": "Profile information for the user",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string", "description": "Email address of the user" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Account creation timestamp" }
+      },
+      "required": ["email", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "userProfile",
+      "description": "User profile document"
+    },
+    "/users/{userId}/files/{fileId}": {
+      "schema": "file",
+      "description": "User-specific uploaded files metadata"
+    }
+  }
+}
